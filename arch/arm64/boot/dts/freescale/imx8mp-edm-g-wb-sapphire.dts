@@ -26,7 +26,7 @@
 		gpio = <&gpio4 0 GPIO_ACTIVE_LOW>;
 		enable-active-low;
 	};
-/*
+
 	reg_lvds_pwr: regulator_lvdspwr {
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_lvds0_pwr>;
@@ -57,7 +57,7 @@
 		default-brightness-level = <6>;
 		status = "disabled";
 	};
-*/
+
 	usb_hub_rst: usb_hub_rst {
 		compatible = "gpio-reset";
 		pinctrl-names = "default";
@@ -99,10 +99,31 @@
 	};
 */
 
+
 	gpio-leds {
 		compatible = "gpio-leds";
 		status = "okay";
 
+	};
+
+	gpio-keys {
+		compatible = "gpio-keys";
+		status = "okay";
+
+		back {
+			label = "PIR";
+		/*	linux,code = <KEY_BACK>;*/
+			gpios = <&gpio4 10 GPIO_ACTIVE_LOW>;
+			wakeup-source;
+		};
+
+
+		home {
+			label = "PIR2";
+		/*	linux,code = <KEY_HOME>;*/
+			gpios = <&gpio4 11 GPIO_ACTIVE_LOW>;
+			wakeup-source;
+		};
 	};
 
 };
@@ -142,18 +163,6 @@
 };
 
 &mipi_csi_1 {
-	status = "disabled";
-};
-
-&lcdif1 {
-	status = "disabled";
-};
-
-&lcdif2 {
-	status = "disabled";
-};
-
-&lcdif3 {
 	status = "disabled";
 };
 
