@@ -111,7 +111,7 @@
 		status = "okay";
 
 		pir1 {
- 			label = "PIR";
+ 			label = "PIRJOSH";
 			linux,code = <KEY_LEFT>;
 			gpios = <&gpio4 10 GPIO_ACTIVE_HIGH>;
  			wakeup-source;
