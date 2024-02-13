@@ -15,7 +15,7 @@
 	chosen {
 		stdout-path = &uart2;
 	};
-
+/*
 	reg_usb_otg_vbus: usb_otg_vbus {
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_otg_vbus>;
@@ -26,7 +26,7 @@
 		gpio = <&gpio4 0 GPIO_ACTIVE_LOW>;
 		enable-active-low;
 	};
-
+*/
 	reg_lvds_pwr: regulator_lvdspwr {
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_lvds0_pwr>;
@@ -484,6 +484,7 @@
 			MX8MP_IOMUXC_SAI1_RXD6__GPIO4_IO08					0x19
 			MX8MP_IOMUXC_SAI1_RXD7__GPIO4_IO09					0x19
 			MX8MP_IOMUXC_SPDIF_EXT_CLK__GPIO5_IO05				0x19
+			MX8MP_IOMUXC_SAI1_RXFS__GPIO4_IO00					0x19
 			>;
 	};
 	
