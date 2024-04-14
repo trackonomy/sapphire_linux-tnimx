@@ -208,7 +208,7 @@
 		/*pinctrl-0 = <&pinctrl_pi4io16_A>;*/
 		#gpio-cells = <2>;
 		status = "okay";
-
+/*
 		rfid_en1 {
 			gpio-hog;
 			gpios = <6 0>;
@@ -222,7 +222,7 @@
 			output-high;
 			line-name = "rfid_en2";
 		};
-
+*/
 		
 		
 	};
