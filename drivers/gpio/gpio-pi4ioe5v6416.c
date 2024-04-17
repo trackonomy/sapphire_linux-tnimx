@@ -358,29 +358,66 @@ static int pi4io16_gpio_unmask_interrupts(struct gpio_chip *chip,
 
 static int pi4io16_gpio_setup(struct pi4io16_priv *pi4io)
 {
-	int ret;
-	struct device *dev = &pi4io->i2c->dev;
-	struct gpio_chip *gc = &pi4io->gpio;
+    int ret;
+    struct device *dev = &pi4io->i2c->dev;
+    struct gpio_chip *gc = &pi4io->gpio;
 
-	gc->ngpio = PI4IO16_N_GPIO;
-	gc->label = pi4io->i2c->name;
-	gc->parent = &pi4io->i2c->dev;
-	gc->owner = THIS_MODULE;
-	gc->base = -1;
-	gc->can_sleep = true;
+    gc->ngpio = PI4IO16_N_GPIO;
+    gc->label = pi4io->i2c->name;
+    gc->parent = &pi4io->i2c->dev;
+    gc->owner = THIS_MODULE;
+    gc->base = -1;
+    gc->can_sleep = true;
 
-	gc->get_direction = pi4io16_gpio_get_direction;
-	gc->direction_input = pi4io16_gpio_direction_input;
-	gc->direction_output = pi4io16_gpio_direction_output;
-	gc->get = pi4io16_gpio_get;
-	gc->set = pi4io16_gpio_set;
+    gc->get_direction = pi4io16_gpio_get_direction;
+    gc->direction_input = pi4io16_gpio_direction_input;
+    gc->direction_output = pi4io16_gpio_direction_output;
+    gc->get = pi4io16_gpio_get;
+    gc->set = pi4io16_gpio_set;
 
-	ret = devm_gpiochip_add_data(dev, gc, pi4io);
-	if (ret) {
-		dev_err(dev, "devm_gpiochip_add_data failed: %d", ret);
-		return ret;
-	}
-	return 0;
+    ret = devm_gpiochip_add_data(dev, gc, pi4io);
+    if (ret) {
+        dev_err(dev, "devm_gpiochip_add_data failed: %d", ret);
+        return ret;
+    }
+
+    // Set all GPIOs as input and enable pull-down
+    ret = regmap_write(pi4io->regmap, PI4IO16_CONFIG_PORT0, 0xFF);
+    if (ret) {
+        dev_err(dev, "Failed to configure port0 as input: %d", ret);
+        return ret;
+    }
+    ret = regmap_write(pi4io->regmap, PI4IO16_CONFIG_PORT1, 0xFF);
+    if (ret) {
+        dev_err(dev, "Failed to configure port1 as input: %d", ret);
+        return ret;
+    }
+
+    ret = regmap_write(pi4io->regmap, PI4IO16_PULLUP_ENB0, 0xFF);
+    if (ret) {
+        dev_err(dev, "Failed to enable pull-ups/down on port0: %d", ret);
+        return ret;
+    }
+    ret = regmap_write(pi4io->regmap, PI4IO16_PULLUP_ENB1, 0xFF);
+    if (ret) {
+        dev_err(dev, "Failed to enable pull-ups/down on port1: %d", ret);
+        return ret;
+    }
+    
+    // Ensure that pull-up select registers are set for pull-down, if applicable
+    // This part depends on your specific hardware setup and might need adjustments
+    ret = regmap_write(pi4io->regmap, PI4IO16_PULLUP_SEL0, 0x00);
+    if (ret) {
+        dev_err(dev, "Failed to set pull-down on port0: %d", ret);
+        return ret;
+    }
+    ret = regmap_write(pi4io->regmap, PI4IO16_PULLUP_SEL1, 0x00);
+    if (ret) {
+        dev_err(dev, "Failed to set pull-down on port1: %d", ret);
+        return ret;
+    }
+
+    return 0;
 }
 
 static int pi4io16_reset_setup(struct pi4io16_priv *pi4io)
