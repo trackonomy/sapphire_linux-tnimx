@@ -208,19 +208,22 @@
 		/*pinctrl-0 = <&pinctrl_pi4io16_A>;*/
 		#gpio-cells = <2>;
 		status = "okay";
+		/* below tags for gpio pins are updated to sapphire 2.3.4.2 */
+		label = "RFID_GPIO_EXP";
+		gpio-line-names =	\
+			"RFID1_GPIO1", "RFID1_GPIO2", "RFID1_GPIO3", "RFID1_GPIO4", "RFID1_GPIO5", "RFID1_GPIO6", "RFID1_EN", "TP31",	\
+			"RFID2_GPIO1", "RFID2_GPIO2", "RFID2_GPIO3", "RFID2_GPIO4", "RFID2_GPIO5", "RFID2_GPIO6", "RFID2_EN", "TP51";
 /*
 		rfid_en1 {
 			gpio-hog;
 			gpios = <6 0>;
 			output-high;
-			line-name = "rfid_en1";
 		};
 
 		rfid_en2 {
 			gpio-hog;
 			gpios = <14 0>;
 			output-high;
-			line-name = "rfid_en2";
 		};
 */
 		
@@ -300,6 +303,11 @@
 		pinctrl-names = "default";
 		#gpio-cells = <2>;
 		status = "okay";
+		/* below tags for gpio pins are updated to sapphire 2.3.4.2 */
+		label = "MODEM_GPIO_EXP";
+		gpio-line-names =	\
+			"CONFIG_0", "CONFIG_1", "CONFIG_2", "CONFIG_3", "OLED_RES", "PE_IO0_5", "PE_IO0_6", "PE_IO0_7",	\
+			"CELL_PWR_EN", "FULL_CARD_POWER_OFF", "PE_IO1_2", "W_DISABLE1#", "W_DISABLE2#", "RST", "PE_IO1_6", "PE_IO1_7"; 
 /*
 		cell_pwr_en {
 			gpio-hog;

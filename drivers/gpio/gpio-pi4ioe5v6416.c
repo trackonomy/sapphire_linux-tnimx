@@ -114,6 +114,7 @@ struct pi4io16_priv {
 	struct regmap *regmap;
 	struct gpio_chip gpio;
 	struct gpio_desc *reset_gpio;
+	const char *gpio_names[PI4IO16_N_GPIO];
 #ifdef CONFIG_GPIO_PI4IOE5V6416_IRQ
 	struct irq_chip irq_chip;
 	struct mutex irq_lock;
@@ -361,8 +362,17 @@ static int pi4io16_gpio_setup(struct pi4io16_priv *pi4io)
     int ret;
     struct device *dev = &pi4io->i2c->dev;
     struct gpio_chip *gc = &pi4io->gpio;
+    const char *label;
 
     gc->ngpio = PI4IO16_N_GPIO;
+    ret = of_property_read_string(dev->of_node, "label", &label);
+    if (ret) {
+        dev_info(dev, "No label property found, using default name\n");
+        gc->label = pi4io->i2c->name;
+    } else {
+        dev_info(dev, " label property found, %s\n",label);
+        gc->label = label;
+    }
     gc->label = pi4io->i2c->name;
     gc->parent = &pi4io->i2c->dev;
     gc->owner = THIS_MODULE;
@@ -374,6 +384,13 @@ static int pi4io16_gpio_setup(struct pi4io16_priv *pi4io)
     gc->direction_output = pi4io16_gpio_direction_output;
     gc->get = pi4io16_gpio_get;
     gc->set = pi4io16_gpio_set;
+
+    if (of_property_read_string_array(dev->of_node, "gpio-line-names", pi4io->gpio_names, gc->ngpio) < 0) {
+        dev_info(dev, "No gpio-line-names property found\n");
+    } else {
+        dev_info(dev, "GPIO line names loaded\n");
+        gc->names = pi4io->gpio_names;
+    }
 
     ret = devm_gpiochip_add_data(dev, gc, pi4io);
     if (ret) {
