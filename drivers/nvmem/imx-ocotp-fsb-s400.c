@@ -357,8 +357,8 @@ static int imx_fsb_s400_fuse_probe(struct platform_device *pdev)
 	fuse->config.add_legacy_fixed_of_cells = true;
 	fuse->config.reg_read = fsb_s400_fuse_read;
 	if ((of_device_is_compatible(pdev->dev.of_node, "fsl,imx93-ocotp")) ||
-	    (of_device_is_compatible(pdev->dev.of_node, "fsl,imx95-ocotp")))
-		fuse->config.reg_write = fsb_s400_fuse_write;
+		(of_device_is_compatible(pdev->dev.of_node, "fsl,imx95-ocotp")))
+			fuse->config.reg_write = fsb_s400_fuse_write;
 	fuse->config.priv = fuse;
 	mutex_init(&fuse->lock);
 	fuse->hw = of_device_get_match_data(&pdev->dev);
