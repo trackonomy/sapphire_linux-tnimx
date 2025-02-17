@@ -134,7 +134,7 @@
 	};
 
 };
-/*
+
 &gpio1 {
 	pinctrl-0 = <&pinctrl_gpio1>;
 	gpio-line-names =	\
@@ -142,8 +142,15 @@
 		"", "", "", "", "", "", "", "",	\
 		"", "", "", "", "", "", "", "",	\
 		"", "", "", "", "", "", "", "";
+
+	CPU_INT {
+		gpio-hog;
+		gpios = <10 0>;
+		output-high;
+	};
 };
 
+/*
 &gpio4 {
 	pinctrl-0 = <&pinctrl_gpio4>;
 	gpio-line-names =	\
