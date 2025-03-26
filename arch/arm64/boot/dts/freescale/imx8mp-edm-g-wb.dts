@@ -404,9 +404,9 @@
 		compatible = "nxp,pca21125";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_rtc>;
-		interrupt-parent = <&gpio4>;
+	    /*	interrupt-parent = <&gpio4>;
 		interrupts = <1 IRQ_TYPE_EDGE_FALLING>;
-		int-gpio = <&gpio4 1 GPIO_ACTIVE_LOW>;
+		int-gpio = <&gpio4 1 GPIO_ACTIVE_LOW>; */
 		spi-max-frequency = <1500000>;
 		spi-cs-high;
 		reg = <0>;
