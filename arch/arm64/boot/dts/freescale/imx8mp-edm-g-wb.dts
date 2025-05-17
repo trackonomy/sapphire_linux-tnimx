@@ -274,13 +274,6 @@
 			};
 		};
 	};
-
-	
-
-
-
-
-
 };
 
 
@@ -359,7 +352,14 @@
 		
 	};
 
-
+	mcp23008: mcp@23 {
+		compatible = "microchip,mcp23008";
+		reg = <0x23>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
 };
 
 &i2c5 {
