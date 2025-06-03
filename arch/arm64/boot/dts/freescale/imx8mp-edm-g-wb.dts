@@ -231,28 +231,15 @@
 	};
 
 	/* USB Type-C Controller */
-	typec@3d {
+	extcon_usbotg1: typec@3d {
 		compatible = "nxp,ptn5150";
-		pinctrl-names = "default";
-		/*pinctrl-0 = <&pinctrl_extcon>;*/
 		reg = <0x3d>;
-		/*interrupt-parent = <&gpio1>;
-		interrupts = <10 IRQ_TYPE_LEVEL_HIGH>;
-		irq-is-id-quirk;*/
-		status ="okay";
-
-		port {
-			typec_dr_sw: endpoint {
-				remote-endpoint = <&usb3_drd_sw>;
-			};
-		};
+		interrupt-parent = <&gpio4>;
+		interrupts = <4 IRQ_TYPE_LEVEL_LOW>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_ptn5150>;
+		status = "okay";
 	};
-
-	
-
-
-
-
 
 };
 
@@ -354,15 +341,8 @@
 	adp-disable;
 	usb-role-switch;
 	role-switch-default-mode = "none";
-	snps,dis-u1-entry-quirk;
-	snps,dis-u2-entry-quirk;
+	extcon = <&extcon_usbotg1>, <&extcon_usbotg1>;
 	status = "okay";
-
-	port {
-		usb3_drd_sw: endpoint {
-			remote-endpoint = <&typec_dr_sw>;
-		};
-	};
 };
 
 
@@ -461,7 +441,6 @@
 			MX8MP_IOMUXC_SAI5_RXC__GPIO3_IO20					0x19
 			/*MX8MP_IOMUXC_NAND_CLE__GPIO3_IO05					0x19*/
 			MX8MP_IOMUXC_SAI1_TXD4__GPIO4_IO16					0x19
-			MX8MP_IOMUXC_SAI1_RXD2__GPIO4_IO04					0x19
 			MX8MP_IOMUXC_SAI1_TXD5__GPIO4_IO17					0x19
 			MX8MP_IOMUXC_SAI1_RXD3__GPIO4_IO05					0x19
 			MX8MP_IOMUXC_GPIO1_IO06__GPIO1_IO06					0x19
@@ -496,6 +475,13 @@
 			>;
 	};
 	
+
+	pinctrl_ptn5150: ptn5150grp {
+		fsl,pins = <
+			MX8MP_IOMUXC_SAI1_RXD2__GPIO4_IO04	0x16
+		>;
+	};
+
 	pinctrl_otg_vbus: otgvbusgrp {
 		fsl,pins = <
 			MX8MP_IOMUXC_SAI1_RXFS__GPIO4_IO00		0x19 /* USB_OTG_PWR_EN */
