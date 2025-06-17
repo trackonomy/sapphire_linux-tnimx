@@ -158,6 +158,27 @@
 			gpios = <&gpio4 2 GPIO_ACTIVE_HIGH>;
  			wakeup-source;
  		};
+		pin1 {
+			label = "PIN1";
+			linux,code = <KEY_RIGHT>;
+			gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
+ 			wakeup-source;
+		    debounce-interval = <10>;
+ 		};
+		pin2 {
+			label = "PIN2";
+			linux,code = <KEY_DOWN>;
+			gpios = <&gpio4 4 GPIO_ACTIVE_HIGH>;
+ 			wakeup-source;
+		    debounce-interval = <10>;
+ 		};
+		pin3 {
+			label = "PIN3";
+			linux,code = <KEY_F1>;
+			gpios = <&gpio4 5 GPIO_ACTIVE_HIGH>;
+ 			wakeup-source;
+		    debounce-interval = <10>;
+ 		};
 	};
 
 };
