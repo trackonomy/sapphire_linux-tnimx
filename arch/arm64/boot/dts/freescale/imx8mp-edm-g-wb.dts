@@ -373,9 +373,57 @@
 		
 	};
 
-	mcp23008: mcp@23 {
+	mcp23008_1: mcp@21 {
+		compatible = "microchip,mcp23008";
+		reg = <0x21>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_2: mcp@22 {
+		compatible = "microchip,mcp23008";
+		reg = <0x22>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_3: mcp@23 {
 		compatible = "microchip,mcp23008";
 		reg = <0x23>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_4: mcp@24 {
+		compatible = "microchip,mcp23008";
+		reg = <0x24>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_5: mcp@25 {
+		compatible = "microchip,mcp23008";
+		reg = <0x25>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_6: mcp@26 {
+		compatible = "microchip,mcp23008";
+		reg = <0x26>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_7: mcp@27 {
+		compatible = "microchip,mcp23008";
+		reg = <0x27>;
 		gpio-controller;
 		#gpio-cells = <2>;
 		pinctrl-names = "default";
