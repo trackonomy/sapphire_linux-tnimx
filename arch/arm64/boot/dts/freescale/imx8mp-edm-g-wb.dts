@@ -104,6 +104,33 @@
 		compatible = "gpio-leds";
 		status = "okay";
 
+		usb1_pwr_en {
+			label = "USB1_PWR_EN";
+			gpios = <&gpio4 6 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+			default-brightness = <1>;
+ 		};
+
+		usb2_pwr_en {
+			label = "USB2_PWR_EN";
+			gpios = <&gpio4 7 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+			default-brightness = <1>;
+		};
+
+		usb3_pwr_en {
+			label = "USB3_PWR_EN";
+			gpios = <&gpio4 16 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+			default-brightness = <1>;
+		};
+
+		usb4_pwr_en {
+			label = "USB4_PWR_EN";
+			gpios = <&gpio4 17 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+			default-brightness = <1>;
+		};
 	};
 
 	gpio-keys {
@@ -130,6 +157,27 @@
 			linux,code = <KEY_UP>;
 			gpios = <&gpio4 2 GPIO_ACTIVE_HIGH>;
  			wakeup-source;
+ 		};
+		pin1 {
+			label = "PIN1";
+			linux,code = <KEY_RIGHT>;
+			gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
+ 			wakeup-source;
+		    debounce-interval = <10>;
+ 		};
+		pin2 {
+			label = "PIN2";
+			linux,code = <KEY_DOWN>;
+			gpios = <&gpio4 4 GPIO_ACTIVE_HIGH>;
+ 			wakeup-source;
+		    debounce-interval = <10>;
+ 		};
+		pin3 {
+			label = "PIN3";
+			linux,code = <KEY_F1>;
+			gpios = <&gpio4 5 GPIO_ACTIVE_HIGH>;
+ 			wakeup-source;
+		    debounce-interval = <10>;
  		};
 	};
 
@@ -184,11 +232,11 @@
 
 
 };
-
+/*
 &eqos {
 	status = "disabled";
 };
-
+*/
 &i2c3 {
 	clock-frequency = <400000>;
 	pinctrl-names = "default", "gpio";
@@ -247,13 +295,6 @@
 			};
 		};
 	};
-
-	
-
-
-
-
-
 };
 
 
@@ -332,7 +373,62 @@
 		
 	};
 
-
+	mcp23008_1: mcp@21 {
+		compatible = "microchip,mcp23008";
+		reg = <0x21>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_2: mcp@22 {
+		compatible = "microchip,mcp23008";
+		reg = <0x22>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_3: mcp@23 {
+		compatible = "microchip,mcp23008";
+		reg = <0x23>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_4: mcp@24 {
+		compatible = "microchip,mcp23008";
+		reg = <0x24>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_5: mcp@25 {
+		compatible = "microchip,mcp23008";
+		reg = <0x25>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_6: mcp@26 {
+		compatible = "microchip,mcp23008";
+		reg = <0x26>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
+	mcp23008_7: mcp@27 {
+		compatible = "microchip,mcp23008";
+		reg = <0x27>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		pinctrl-names = "default";
+		status = "okay";
+	};
 };
 
 &i2c5 {
