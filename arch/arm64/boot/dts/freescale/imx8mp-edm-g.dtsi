@@ -44,7 +44,7 @@
 		startup-delay-us = <100>;
 		off-on-delay-us = <12000>;
 	};
-
+/*
 	wl_reg_on: wlreg_on {
 		compatible = "regulator-fixed";
 		pinctrl-names = "default";
@@ -57,7 +57,6 @@
 		startup-delay-us = <100>;
 		enable-active-high;
 	};
-
 	bt_reg_on: btreg_on {
 		compatible = "gpio-reset";
 		pinctrl-names = "default";
@@ -68,6 +67,7 @@
 		#reset-cells = <0>;
 	};
 
+*/
 	sound-hdmi {
 		compatible = "fsl,imx-audio-hdmi";
 		model = "audio-hdmi";
@@ -435,6 +435,7 @@
 };
 
 /* BT */
+/*
 &uart1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart1>;
@@ -444,6 +445,7 @@
 	resets = <&bt_reg_on>;
 	status = "okay";
 };
+*/
 
 /* UART_A on EDMG, console */
 &uart2 {
@@ -510,6 +512,7 @@
 };
 
 /* WIFI SDIO */
+/*
 &usdhc1 {
 	assigned-clocks = <&clk IMX8MP_CLK_USDHC1>;
 	assigned-clock-rates = <133333333>;
@@ -525,6 +528,7 @@
 	fsl,sdio-async-interrupt-enabled;
 	status = "okay";
 };
+*/
 
 /* SD card on baseboard */
 &usdhc2 {
