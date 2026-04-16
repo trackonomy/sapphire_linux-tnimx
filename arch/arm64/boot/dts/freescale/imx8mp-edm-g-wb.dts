@@ -66,6 +66,57 @@
 		reset-delay-us = <10>;
 		#reset-cells = <0>;
 	};
+
+	reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		m7_reserved: m7@0x6F000000 {
+			no-map;
+			reg = <0 0x6F000000 0 0x1000000>;
+		};
+
+		vdev0vring0: vdev0vring0@55000000 {
+			compatible = "shared-dma-pool";
+			reg = <0 0x55000000 0 0x8000>;
+			no-map;
+		};
+
+		vdev0vring1: vdev0vring1@55008000 {
+			compatible = "shared-dma-pool";
+			reg = <0 0x55008000 0 0x8000>;
+			no-map;
+		};
+
+		vdevbuffer: vdevbuffer@55400000 {
+			compatible = "shared-dma-pool";
+			reg = <0 0x55400000 0 0x100000>;
+			no-map;
+		};
+		itcm: itcm@00000000 {
+			reg = <0 0x00000000 0 0x20000>;
+		};
+
+		dtcm: dtcm@20000000 {
+			reg = <0 0x20000000 0 0x20000>;
+		};
+	};
+
+	imx8mp-cm7 {
+		compatible = "fsl,imx8mp-cm7";
+		rsc-da = <0x55000000>;
+		clocks = <&clk IMX8MP_CLK_M7_DIV>;
+		mbox-names = "tx", "rx", "rxdb";
+		mboxes = <&mu 0 1
+			  &mu 1 1
+			  &mu 3 1>;
+		memory-region = <&m7_reserved>, <&itcm>, <&dtcm>, <&vdev0vring0>, <&vdev0vring1>, <&vdevbuffer>;
+		status = "okay";
+		fsl,startup-delay-ms = <500>;
+		fsl,auto-boot = <0>;
+	};
+
 /*
 	sound-wm8960 {
 		compatible = "fsl,imx7d-evk-wm8960", "fsl,imx-audio-wm8960";
@@ -170,6 +221,10 @@
 };
 
 &mipi_csi_1 {
+	status = "disabled";
+};
+
+&uart4 {
 	status = "disabled";
 };
 
