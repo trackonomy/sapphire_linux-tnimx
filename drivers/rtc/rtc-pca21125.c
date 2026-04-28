@@ -24,7 +24,6 @@
 
 #include <linux/bcd.h>
 #include <linux/delay.h>
-#define DEBUG 1
 #include <linux/device.h>
 #include <linux/errno.h>
 #include <linux/init.h>
@@ -37,6 +36,7 @@
 #include <linux/module.h>
 #include <linux/regmap.h>
 
+#define DEBUG 0
 #define RTC_FEATURE_UPDATE_INTERRUPT 4
 /* REGISTERS */
 #define pca21125_REG_CTRL1 (0x00) /* Control Register 1 */
