@@ -1,16 +1,18 @@
-
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
+ * Copyright 2026 Trackonomy Systems.
  *
- * Author: Aditya Biswas <aditya@tackonomysystems.com>
+ * Sapphire carrier board for TechNexion EDM-G iMX8MP SOM.
  *
+ * Author: Aditya Biswas <aditya@trackonomysystems.com>
  */
 
 /dts-v1/;
 #include "imx8mp-edm-g.dtsi"
 
 / {
-	model = "TechNexion EDM-G-IMX8MP and sapphire baseboard";
-	compatible = "fsl,imx8mp-edmg", "fsl,imx8mp", "fsl,imx8mp-sapphire";
+	model = "Trackonomy Sapphire iMX8MP";
+	compatible = "trk,sapphire-imx8mp", "fsl,imx8mp-edmg", "fsl,imx8mp";
 
 	chosen {
 		stdout-path = &uart2;
@@ -25,11 +27,6 @@
 		reset-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
 		reset-delay-us = <10>;
 		#reset-cells = <0>;
-	};
-
-	gpio-leds {
-		compatible = "gpio-leds";
-		status = "okay";
 	};
 
 	gpio-keys {
