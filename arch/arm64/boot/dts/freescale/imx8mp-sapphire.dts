@@ -59,6 +59,10 @@
 	};
 };
 
+&pwm1 {
+    status = "disabled";
+};
+
 &pwm3 {
 	status = "disabled";
 };
@@ -421,7 +425,7 @@
 			MX8MP_IOMUXC_ECSPI1_SCLK__ECSPI1_SCLK				0x82
 			MX8MP_IOMUXC_ECSPI1_MOSI__ECSPI1_MOSI				0x82
 			MX8MP_IOMUXC_ECSPI1_MISO__ECSPI1_MISO				0x82
-			MX8MP_IOMUXC_ECSPI1_SS0__GPIO5_IO09  				0x12
+			MX8MP_IOMUXC_ECSPI1_SS0__GPIO5_IO09					0x19
 			MX8MP_IOMUXC_SAI1_TXD3__GPIO4_IO15					0x12
 		>;
 	};
