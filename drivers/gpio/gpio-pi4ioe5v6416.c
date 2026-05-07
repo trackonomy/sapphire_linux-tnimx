@@ -3,6 +3,7 @@
  * https://www.diodes.com/assets/Datasheets/PI4IOE5V6416.pdf
  *
  */
+#include <linux/gpio/driver.h>
 #include <linux/acpi.h>
 #include <linux/gpio.h>
 #include <linux/i2c.h>
@@ -671,8 +672,7 @@ static int pi4io16_irq_setup(struct pi4io16_priv *pi4io)
 }
 #endif
 
-static int pi4io16_probe(struct i2c_client *client,
-			 const struct i2c_device_id *id)
+static int pi4io16_probe(struct i2c_client *client)
 {
 	int ret;
 	struct device *dev = &client->dev;
@@ -722,7 +722,6 @@ static int pi4io16_probe(struct i2c_client *client,
 
 static void pi4io16_remove(struct i2c_client *client)
 {
-	return 0;
 }
 
 static const struct i2c_device_id pi4io16_id_table[] = { { "pi4ioe5v6416", 0 },
