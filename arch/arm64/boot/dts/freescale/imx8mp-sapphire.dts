@@ -13,6 +13,11 @@
 / {
 	model = "Trackonomy Sapphire iMX8MP";
 	compatible = "trk,sapphire-imx8mp", "fsl,imx8mp-edmg", "fsl,imx8mp";
+	
+	aliases {
+		rtc0 = &spidev1;     /* PCA21125 — kirkstone-equivalent rtc0 */
+        	rtc1 = &snvs_rtc;    /* SoC's internal RTC — secondary */
+	};
 
 	chosen {
 		stdout-path = &uart2;
